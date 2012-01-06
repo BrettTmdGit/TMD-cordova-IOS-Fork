@@ -27,10 +27,13 @@ typedef NSUInteger CaptureError;
 	NSString* callbackid;
 	NSInteger quality;
     NSString* mimeType;
+    bool saveToPhotoAlbum;
+    
 }
 @property (assign) NSInteger quality;
 @property (copy)   NSString* callbackId;
 @property (copy)   NSString* mimeType;
+@property (assign) bool saveToPhotoAlbum;
 
 
 - (void) dealloc;

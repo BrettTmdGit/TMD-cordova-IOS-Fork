@@ -22,6 +22,7 @@
 @synthesize quality;
 @synthesize callbackId;
 @synthesize mimeType;
+@synthesize saveToPhotoAlbum;
 
 
 - (uint64_t) accessibilityTraits
@@ -115,6 +116,7 @@
         pickerController.delegate = self;
         pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         pickerController.allowsEditing = NO;
+        pickerController.saveToPhotoAlbum = [[options valueForKey:@"saveToPhotoAlbum"] boolValue];
         if ([pickerController respondsToSelector:@selector(mediaTypes)]) {
             // iOS 3.0
             pickerController.mediaTypes = [NSArray arrayWithObjects: (NSString*) kUTTypeImage, nil];
@@ -145,8 +147,12 @@
 {
     PluginResult* result = nil;
     NSString* jsString = nil;
-    // save the image to photo album
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    // save the image to photo album if desired.
+    if(pickerController.saveToPhotoAlbum)
+    {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    }
+   
     
     NSData* data = nil;
     if (mimeType && [mimeType isEqualToString:@"image/png"]) {

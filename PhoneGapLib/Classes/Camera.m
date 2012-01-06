@@ -140,6 +140,7 @@
 		}else {
 			image = [info objectForKey:UIImagePickerControllerOriginalImage];
 		}
+        
     if (self.pickerController.saveToPhotoAlbum) {
       UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     }
